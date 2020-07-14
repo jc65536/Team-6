@@ -96,7 +96,9 @@ class Admin_Dashboard extends Component {
         return (
             <div>
                 <h1>Admin Dashboard</h1>
-                <h2>School: Bellarmine College Preparatory</h2>
+                <h2 >School:</h2>
+
+
                 {generateTable()}
             </div>
         )
