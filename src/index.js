@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Form from "./Form"
 import * as serviceWorker from './serviceWorker';
 import DatabaseTest from './DatabaseTest';
+import Admin_Dashboard from "./admin/Admin_Dashboard"
 
 ReactDOM.render(
     <div>
-        <Form />
+        <Admin_Dashboard />
     </div>
     , document.getElementById('root')
 );
