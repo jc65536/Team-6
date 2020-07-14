@@ -13,18 +13,26 @@ var class_roster;
 var card_style = {
     border: "1px solid black",
     padding: "5px",
-    marginBottom: "5px"
+    margin: "20px 0px",
+    borderRadius: "10px",
+    padding: "10px",
+}
+
+var symptom_map = {
+    "temp": "Recent fever",
+    "cough": "Coughs",
+    "mental": "Mental health issues"
 }
 
 var riskColors = {
     0: {
-        color: "green"
+        background: "linear-gradient(135deg, #00ff00, 3%, #ffffff 15%)"
     },
     1: {
-        color: "#daa520"
+        background: "linear-gradient(135deg, #ffff00, 3%, #ffffff 15%)"
     },
     2: {
-        color: "red",
+        background: "linear-gradient(135deg, #ff0000, 3%, #ffffff 15%)",
         fontWeight: "bold"
     }
 }
@@ -51,8 +59,10 @@ function uniq(a) {
 function generateTable() {
     var time = new Date().getTime();
     var output = [];
-
+    var stats = [0, 0, 0];
+    var total = 0;
     try {
+        total = student_list.length;
         var absent = student_list.filter(name => !Object.keys(student_profiles).includes(name)); // gets a list of students whose info is not in db
         for (var i in absent) {
             output.push(
@@ -83,10 +93,16 @@ function generateTable() {
 
         var contacts = "";
         if (symptoms.length > 1) {                              // more than 1 symptom = at risk (not the most scientific but works for now)
-            contacts = "Contacted students: " + uniq(getContacts(i)).join(", ");
+            contacts = "Contacted students: " + uniq(getContacts(i)).filter(value => value != i).join(", ");
         }
 
         var style = Object.assign({}, card_style, riskColors[Math.min(symptoms.length, 2)]);
+        
+        symptoms = symptoms.map(value => {
+            return symptom_map[value];
+        });
+
+        stats[Math.max(0, 2-symptoms.length)]++;
 
         if (symptoms.length == 0) {
             symptoms = "none!";
@@ -103,6 +119,18 @@ function generateTable() {
             </div>
         );
     }
+
+    var critical_risk = (stats[0] / total * 100).toFixed(1);
+    var moderate_risk = (stats[1] / total * 100).toFixed(1);
+    var healthy = (stats[2] / total * 100).toFixed(1);
+    var unknown = (100 - critical_risk - moderate_risk - healthy).toFixed(1);
+    output.unshift(<div style={{border: "1px solid black", width: "30%", padding: "10px", borderRadius: "10px"}}>
+        <h3>Breakdown:</h3>
+        <span style={{width: "calc(100% - 10px)", display: "inline-block", padding: "5px", background: "linear-gradient(90deg, #ff0000, 5%, #ffffff " + critical_risk + "%)" }}>Critical symptoms {critical_risk}%</span> <br/>
+        <span style={{width: "calc(100% - 10px)", display: "inline-block", padding: "5px", background: "linear-gradient(90deg, #ffff00, 5%, #ffffff " + moderate_risk + "%)" }}>Moderate symptoms {moderate_risk}%</span> <br/>
+        <span style={{width: "calc(100% - 10px)", display: "inline-block", padding: "5px", background: "linear-gradient(90deg, #00ff00, 5%, #ffffff " + healthy + "%)" }}>Healthy {healthy}%</span> <br/>
+        <span style={{width: "calc(100% - 10px)", display: "inline-block", padding: "5px", background: "linear-gradient(90deg, #666666, 5%, #ffffff " + healthy + "%)" }}>Unknown {unknown}%</span>
+    </div>)
     return output;
 }
 
@@ -144,9 +172,11 @@ class Admin_Dashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{
+                padding: "40px"
+            }}>
                 <h1>Admin Dashboard</h1>
-                <h2 >School:</h2>
+                <h3>School: Bellarmine College Preparatory</h3>
 
 
                 {generateTable()}
