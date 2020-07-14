@@ -1,54 +1,62 @@
-import React, {Component} from "react";
-var firebase = require("firebase/app");
-require("firebase/database");
+import React, { Component } from "react";
+import fire from "../config/fire"
 
-var config = {
-    apiKey: "AIzaSyAk25emmsGGVuaACxiQi8YIG5ymury6zmw",
-    authDomain: "covid-proj-31f67.firebaseapp.com",
-    databaseURL: "https://covid-proj-31f67.firebaseio.com",
-    projectId: "covid-proj-31f67",
-    storageBucket: "covid-proj-31f67.appspot.com",
-    messagingSenderId: "238699515447",
-    appId: "1:238699515447:web:df9fe8414a9999b7df39b2",
-    measurementId: "G-M8KVXCVNN9"
-};
-
-if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-}
-
-var allready = 3;           // counter, please don't mind my programming practices
-
-var db = firebase.database();
+var db = fire.database();
 
 // get student list, classroom list, and profiles from database
 var student_list;
-db.ref("students/BCP").once("value").then(function(data) {
-    student_list = data.val();
-    console.log(student_list);
-    allready--;
-});
-
 var classroom_list;
-db.ref("classrooms/BCP").once("value").then(function(data) {
-    classroom_list = data.val();
-    console.log(classroom_list);
-    allready--;
-});
-
 var student_profiles;
-db.ref("studentProfiles/BCP").once("value").then(function(data) {
-    student_profiles = data.val();
-    console.log(student_profiles);
-    allready--;
-});
+
+// style for each students' status card
+var card_style = {
+    border: "1px solid black",
+    padding: "5px",
+    marginBottom: "5px"
+}
 
 function generateTable() {
+    var time = new Date().getTime();
     var output = [];
+
+    try {
+        var absent = student_list.filter(name => !Object.keys(student_profiles).includes(name)); // gets a list of students whose info is not in db
+        for (var i in absent) {
+            output.push(
+                <div style={card_style}>
+                    {absent[i]} has never taken the survey, so no data is available!<br />
+                    {slack_warning}
+                </div>
+            );
+        }
+    } catch (e) {
+        console.error(e);
+    }
+
     for (var i in student_profiles) {
+        var profile = student_profiles[i];
+
+        var symptoms = [];
+        for (var j in profile.symptoms) {
+            if (profile.symptoms[j] == "y") {
+                symptoms.push(j);
+            }
+        }
+
+        var slack_warning = "";
+        if (time - profile.lasUpdate > 86400000) {              // 86400000 ms = 1 day
+            slack_warning = "This student has not been completing the survey on time!"
+        }
+
+        if (symptoms.length == 0) {
+            symptoms.push("none!");
+        }
+
         output.push(
-            <div>
-                {i.cough}<br/>
+            <div style={card_style}>
+                {i}<br />
+                Symptoms: {symptoms}<br />
+                {slack_warning}
             </div>
         );
     }
@@ -56,6 +64,34 @@ function generateTable() {
 }
 
 class Admin_Dashboard extends Component {
+    state = {
+        dataToLoad: 3
+    };
+
+    componentDidMount() {
+        this._asyncRequest = db.ref("students/BCP").once("value").then(data => {
+            student_list = data.val();
+            this._asyncRequest = null;
+            this.setState((state) => {
+                return { dataToLoad: --state.dataToLoad };
+            });
+        });
+        this._asyncRequest = db.ref("classrooms/BCP").once("value").then(data => {
+            classroom_list = data.val();
+            this._asyncRequest = null;
+            this.setState((state) => {
+                return { dataToLoad: --state.dataToLoad };
+            });
+        });
+        this._asyncRequest = db.ref("studentProfiles/BCP").once("value").then(data => {
+            student_profiles = data.val();
+            this._asyncRequest = null;
+            this.setState((state) => {
+                return { dataToLoad: --state.dataToLoad };
+            });
+        });
+    }
+
     render() {
         return (
             <div>
