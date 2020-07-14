@@ -86,14 +86,73 @@
     position: absolute;
     top: 28%;
     transform: translate(-50%, -50%);
-    width:175px;
-    height:175px;
+    width: 175px;
+    height: 175px;
 }
 
 /*Form.js*/
-.left {
-    float:left;
+.FORMJS {
+    background: url(images/backgroud.png) repeat center center fixed;
+    min-height: 100%;
+    min-width: 100%;
+    position: fixed;
 }
+
+.left {
+    background: rgb(128, 128, 128);
+    margin-left:60px;
+    float: left;
+}
+
+.leftside-form {
+    padding:10px;
+}
+
 .right {
-float:right;
+    float: right;
+    padding-right:20px;
+}
+
+.right-body {
+    position: relative;
+}
+
+.selectedBody {
+    position: absolute;
+}
+
+
+.head {
+    top:-440px;
+    left:0px;
+}
+
+.rightArm {
+    top:-360px;
+    left:155px;
+}
+
+.leftArm {
+    top:-370px;
+    left:30px;
+}
+
+.throat {
+    top:-400px;
+    left:45px;
+}
+
+.chest {
+    top:-370px;
+    left:80px;
+}
+
+.stomach {
+    top:-310px;
+    left:77px;
+}
+
+.legs {
+    top:-250px;
+    left:80px;
 }
