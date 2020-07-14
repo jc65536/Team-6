@@ -1,27 +1,6 @@
-// import React, {Component} from 'react';
-// import '../App.css';
-//
-//
-// class Form extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <form>
-//                     <iframe
-//                         src="https://docs.google.com/forms/d/e/1FAIpQLSfpQjmRZ3CwXlBPozepV-23gCxqudVpZmg0j7M8CBR1fYJxOQ/viewform?embedded=true"
-//                         width="640" height="938" frameBorder="0" marginHeight="0" marginWidth="0"
-//                         className={"form-google"}>Loading…
-//                     </iframe>
-//                 </form>
-//             </div>
-//         )
-//     }
-// }
-//
-// export default Form;
-
 import React from 'react';
 import $ from "jquery";
+import {Navigation} from "../Navigation";
 var firebase = require("firebase/app");
 require("firebase/database");
 
@@ -79,34 +58,37 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.submit_form}>
-                <div>
-                    <label>What's your name?</label><br />
-                    <input name="name" id="name"/>
-                </div>
-                <div>
-                    <label>Do you have a cough?</label><br />
-                    <input type="radio" name="cough" value="y"/>
-                    <label>Yes</label>
-                    <input type="radio" name="cough" value="n"/>
-                    <label>No</label>
-                </div>
-                <div>
-                    <label>Have you had a temperature recently?</label><br />
-                    <input type="radio" name="temp" value="y"/>
-                    <label>Yes</label>
-                    <input type="radio" name="temp" value="n"/>
-                    <label>No</label>
-                </div>
-                <div>
-                    <label>Are you mentally unstable?</label><br />
-                    <input type="radio" name="mental" value="y"/>
-                    <label>Yes</label>
-                    <input type="radio" name="mental" value="n"/>
-                    <label>No</label>
-                </div>
-                <input type="submit" value="Submit"/>
-            </form>
+            <div>
+                <Navigation/>
+                <form onSubmit={this.submit_form}>
+                    <div>
+                        <label>What's your name?</label><br />
+                        <input name="name" id="name"/>
+                    </div>
+                    <div>
+                        <label>Do you have a cough?</label><br />
+                        <input type="radio" name="cough" value="y"/>
+                        <label>Yes</label>
+                        <input type="radio" name="cough" value="n"/>
+                        <label>No</label>
+                    </div>
+                    <div>
+                        <label>Have you had a temperature recently?</label><br />
+                        <input type="radio" name="temp" value="y"/>
+                        <label>Yes</label>
+                        <input type="radio" name="temp" value="n"/>
+                        <label>No</label>
+                    </div>
+                    <div>
+                        <label>Are you mentally unstable?</label><br />
+                        <input type="radio" name="mental" value="y"/>
+                        <label>Yes</label>
+                        <input type="radio" name="mental" value="n"/>
+                        <label>No</label>
+                    </div>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
         )
     }
 }

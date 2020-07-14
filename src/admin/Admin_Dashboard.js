@@ -57,24 +57,11 @@ function generateTable() {
 }
 
 class Admin_Dashboard extends Component {
-constructor() {
-super();
-this.state = {
-school_name: "Mason High School"
-}
-
-
-function() {
-some call
-this.setState({
-school_name:
-}
-
     render() {
         return (
             <div>
                 <h1>Admin Dashboard</h1>
-                <h2 onMouseMove={this.function}>School:{this.state.school_name}</h2>
+                <h2 >School:</h2>
 
 
                 {generateTable()}
@@ -83,4 +70,5 @@ school_name:
     }
 }
 
-export default Admin_Dashboard*/
+export default Admin_Dashboard
+*/

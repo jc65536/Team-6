@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import DatabaseTest from './DatabaseTest';
 import Admin_Dashboard from "./admin/Admin_Dashboard"
 import App from "./App";
 
