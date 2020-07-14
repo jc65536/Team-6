@@ -16,6 +16,19 @@ var card_style = {
     marginBottom: "5px"
 }
 
+var riskColors = {
+    0: {
+        color: "green"
+    },
+    1: {
+        color: "#daa520"
+    },
+    2: {
+        color: "red",
+        fontWeight: "bold"
+    }
+}
+
 function getContacts(risk_student) {
     var contacted = [];
     for (var j in class_roster) {
@@ -30,7 +43,7 @@ function getContacts(risk_student) {
 // removes array duplicates
 function uniq(a) {
     var seen = {};
-    return a.filter(function(item) {
+    return a.filter(function (item) {
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
 }
@@ -68,19 +81,21 @@ function generateTable() {
             slack_warning = "This student has not been completing the survey on time!"
         }
 
-        if (symptoms.length == 0) {
-            symptoms.push("none!");
-        }
-
         var contacts = "";
         if (symptoms.length > 1) {                              // more than 1 symptom = at risk (not the most scientific but works for now)
             contacts = "Contacted students: " + uniq(getContacts(i)).join(", ");
         }
 
-        symptoms = symptoms.join(", ")
+        var style = Object.assign({}, card_style, riskColors[Math.min(symptoms.length, 2)]);
+
+        if (symptoms.length == 0) {
+            symptoms = "none!";
+        } else {
+            symptoms = symptoms.join(", ");
+        }
 
         output.push(
-            <div style={card_style} id={i}>
+            <div style={style} id={i}>
                 {i}<br />
                 Symptoms: {symptoms}<br />
                 {slack_warning}
