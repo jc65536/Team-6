@@ -19,60 +19,63 @@ if (!firebase.apps.length) {
 }
 
 var db = firebase.database();
-/*
-var school_names;
-db.ref("schoolNames").once("value").then(function(data) {
-    school_names = data.val();
-    console.log(school_names);
+
+// gets a list of student names for "security" to check against
+var student_roster;
+db.ref("students/BCP").once("value").then(function (data) {
+    student_roster = data.val();
 });
-function make_item(x) {
-    return <option>{x}</option>;
-}
-*/
 
 class Form extends React.Component {
-
     submit_form() {
         // gets values of name, cough, and temp fields
         var name = $("input[name=name]").val();
-        var cough = $("input[type=radio][name=cough]:checked").val(); // jquery selectors filter through only checked radio buttons named cough
-        var temp = $("input[type=radio][name=temp]:checked").val();   // same here
-        var mental = $("input[type=radio][name=mental]:checked").val();   // same here
-        console.log(name);
-        console.log(cough);
-        console.log(temp);
-        console.log(mental);
-        db.ref("studentProfiles/BCP/" + name).set({
-            cough: cough,
-            temp: temp,
-            mental: mental
-        });
-        alert("Thank you for completing this form");
+        var cough = $("input[type=radio][name=cough]:checked").val();       // jquery selectors filter through only checked radio buttons named cough
+        var temp = $("input[type=radio][name=temp]:checked").val();         // same here
+        var mental = $("input[type=radio][name=mental]:checked").val();     // same here
+
+        // "security"
+        if (student_roster.includes(name)) {
+            console.log(name);
+            console.log(cough);
+            console.log(temp);
+            console.log(mental);
+            // writes variables to student profile under the student name
+            db.ref("studentProfiles/BCP/" + name).set({
+                cough: cough,
+                temp: temp,
+                mental: mental,
+                lastUpdate: new Date().getTime()                            // lastUpdate key stores the last time the survey was taken. In the admin dashboard the admin can see any students whose lastUpdate was more than 24 hr ago, enabling them to ban such students.
+            });
+            alert("Thank you for completing this form");
+        } else {
+            alert("You are not a student at Bellarmine College Preparatory.");
+        }
     }
 
     render() {
         return (
             <form onSubmit={this.submit_form}>
                 <div>
-                    <label>What's your name?</label><br/>
+                    <label>What's your name?</label><br />
                     <input name="name" id="name"></input>
                 </div>
                 <div>
-                    <label>Do you have a cough?</label><br/>
+                    <label>Do you have a cough?</label><br />
                     <input type="radio" name="cough" value="y"></input>
                     <label>Yes</label>
                     <input type="radio" name="cough" value="n"></input>
                     <label>No</label>
                 </div>
                 <div>
-                    <label>Have you had a temperature recently?</label><br/>
+                    <label>Have you had a temperature recently?</label><br />
                     <input type="radio" name="temp" value="y"></input>
                     <label>Yes</label>
                     <input type="radio" name="temp" value="n"></input>
                     <label>No</label>
                 </div>
                 <div>
-                    <label>Are you mentally unstable?</label><br/>
+                    <label>Are you mentally unstable?</label><br />
                     <input type="radio" name="mental" value="y"></input>
                     <label>Yes</label>
                     <input type="radio" name="mental" value="n"></input>

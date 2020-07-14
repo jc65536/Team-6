@@ -30,16 +30,9 @@ class DatabaseTest extends React.Component {
                 "WMHS": []
             },
             students: {
-                "BCP": ["Samuel Sovi", "Jonathan Joestar", "Robert E. O. Speedwagon", "Erina Pendleton"],
+                "BCP": ["Samuel Sovi", "Jonathan Joestar", "Robert Speedwagon", "Erina Pendleton"],
                 "PHHS": [],
                 "WMHS": [],
-            },
-            studentProfiles: {
-                "BCP": {
-                    "Samuel Sovi": {
-                        
-                    }
-                }
             }
         });
     }
