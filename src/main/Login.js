@@ -88,14 +88,6 @@ export class Login extends Component {
                         </label>
                         <button type="submit" onClick={this.login} className={"login-button"}>Login</button>
                         <button onClick={this.signup} className={"login-button"}>Signup</button>
-                        <button onClick={this.googleSignIn} className={"login-button"}>
-                            <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                            alt="logo"
-                            className={"login-google-img"}
-                            />
-                            Sign in
-                        </button>
                     </form>
 
                 </div>

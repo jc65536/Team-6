@@ -60,12 +60,6 @@
     width: 100px;
 }
 
-.login-google-img {
-    width:15px;
-    height: 15px;
-    margin-right:5px;
-}
-
 /*Student_Dashboard.js*/
 .sd-div {
     background: url(images/backgroud.png) repeat center center fixed;
@@ -83,7 +77,12 @@
     height: 200px;
     width: 200px;
     margin: 15px;
-    background-color: #bbb;
+    background-color: #995555;
     border-radius: 50%;
     display: inline-block;
+}
+
+.dot img {
+    width:200px;
+    height:200px;
 }
