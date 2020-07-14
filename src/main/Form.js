@@ -1,6 +1,10 @@
 import React from 'react';
 import $ from "jquery";
 import {Navigation} from "../Navigation";
+import body from '../images/body.jpg'
+import '../App.css';
+
+
 var firebase = require("firebase/app");
 require("firebase/database");
 
@@ -28,6 +32,13 @@ db.ref("students/BCP").once("value").then(function (data) {
 });
 
 class Form extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            selectedBody:{}
+        }
+    }
+
     submit_form() {
         // gets values of name, cough, and temp fields
         var name = $("input[name=name]").val();
@@ -60,32 +71,55 @@ class Form extends React.Component {
         return (
             <div>
                 <Navigation/>
-                <form onSubmit={this.submit_form}>
-                    <div>
-                        <label>What's your name?</label><br />
-                        <input name="name" id="name"/>
+
+                <form onSubmit={this.submit_form} className={"form"}>
+                    <div className={"left"}>
+                        <div>
+                            <label>What's your name?</label><br/>
+                            <input name="name" id="name"/>
+                        </div>
+                        <div>
+                            <label>Do you have a cough?</label><br/>
+                            <input type="radio" name="cough" value="y"/>
+                            <label>Yes</label>
+                            <input type="radio" name="cough" value="n"/>
+                            <label>No</label>
+                        </div>
+                        <div>
+                            <label>Have you had a temperature recently?</label><br/>
+                            <input type="radio" name="temp" value="y"/>
+                            <label>Yes</label>
+                            <input type="radio" name="temp" value="n"/>
+                            <label>No</label>
+                        </div>
+                        <div>
+                            <label>Are you mentally unstable?</label><br/>
+                            <input type="radio" name="mental" value="y"/>
+                            <label>Yes</label>
+                            <input type="radio" name="mental" value="n"/>
+                            <label>No</label>
+                        </div>
                     </div>
-                    <div>
-                        <label>Do you have a cough?</label><br />
-                        <input type="radio" name="cough" value="y"/>
-                        <label>Yes</label>
-                        <input type="radio" name="cough" value="n"/>
-                        <label>No</label>
+                    <div className={"right"}>
+                        <img src={body} useMap="#image-map" alt={"body"}/>
+                        <map name="image-map">
+                            <area target="_blank" alt="Arm" title="Arm"
+                                  coords="71,89,86,124,54,262,28,252" shape="poly"/>
+                            <area target="_blank" alt="Arm" title="Arm"
+                                  coords="170,84,159,120,198,262,216,253" shape="poly"/>
+                            <area target="_blank" alt="Legs" title="Legs"
+                                  coords="86,221,164,433" shape="rect"/>
+                            <area target="_blank" alt="Stomach" title="Stomach"
+                                  coords="91,147,158,203" shape="rect"/>
+                            <area target="_blank" alt="Chest" title="Chest"
+                                  coords="90,83,158,134" shape="rect"/>
+                            <area target="_blank" alt="Throat" title="Throat"
+                                  coords="110,60,138,72" shape="rect"/>
+                            <area target="_blank" alt="Head" title="Head"
+                                  coords="108,16,138,29" shape="rect"/>
+                        </map>
                     </div>
-                    <div>
-                        <label>Have you had a temperature recently?</label><br />
-                        <input type="radio" name="temp" value="y"/>
-                        <label>Yes</label>
-                        <input type="radio" name="temp" value="n"/>
-                        <label>No</label>
-                    </div>
-                    <div>
-                        <label>Are you mentally unstable?</label><br />
-                        <input type="radio" name="mental" value="y"/>
-                        <label>Yes</label>
-                        <input type="radio" name="mental" value="n"/>
-                        <label>No</label>
-                    </div>
+
                     <input type="submit" value="Submit"/>
                 </form>
             </div>

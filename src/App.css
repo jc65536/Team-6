@@ -89,3 +89,11 @@
     width:175px;
     height:175px;
 }
+
+/*Form.js*/
+.left {
+    float:left;
+}
+.right {
+float:right;
+}
