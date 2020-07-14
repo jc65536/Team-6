@@ -3,10 +3,10 @@ import {Navigation} from "../Navigation";
 import '../App.css';
 
 
-export class Home extends Component {
+export class Student_Dashboard extends Component {
     render() {
         return (
-            <div>
+            <div className={"sd-div"}>
                 <header>
                     <Navigation/>
                 </header>

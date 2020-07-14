@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Navigation} from '../Navigation';
 import fire from '../config/fire';
+import '../App.css'
 
 export class Login extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export class Login extends Component {
         e.preventDefault();
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
             console.log(u);
-            window.location.assign("/home")
+            window.location.assign("/student_dashboard")
         }).catch((error) => {
             console.log(error);
         });
@@ -35,7 +36,7 @@ export class Login extends Component {
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
         }).then((u) => {
             console.log(u);
-            window.location.assign("/home")
+            window.location.assign("/student_dashboard")
         })
             .catch((error) => {
                 console.log(error);
@@ -50,29 +51,31 @@ export class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className={"login-div"}>
                 <Navigation/>
-                <form>
-                    <label>
-                        Email address:
-                        <input value={this.state.email}
-                               onChange={this.handleChange}
-                               type="email"
-                               name="email"
-                               placeholder="Enter email"/>
-                    </label>
-                    <label>
-                        Password:
-                        <input value={this.state.password}
-                               onChange={this.handleChange}
-                               type="password"
-                               name="password"
-                               placeholder="Password"/>
-                    </label>
-                    <button type="submit" onClick={this.login}>Login</button>
-                    <button onClick={this.signup}>Signup</button>
-                </form>
+                <div className={"login-div-div"}>
+                    <form className={"login-form"}>
+                        <label className={"login-label"}>
+                            Email address:
+                            <input value={this.state.email}
+                                   onChange={this.handleChange}
+                                   type="email"
+                                   name="email"
+                                   placeholder="Enter email"/>
+                        </label>
+                        <label className={"login-label"}>
+                            Password:
+                            <input value={this.state.password}
+                                   onChange={this.handleChange}
+                                   type="password"
+                                   name="password"
+                                   placeholder="Password"/>
+                        </label>
+                        <button type="submit" onClick={this.login} className={"login-button"}>Login</button>
+                        <button onClick={this.signup}  className={"login-button"}>Signup</button>
+                    </form>
 
+                </div>
             </div>
         );
     }

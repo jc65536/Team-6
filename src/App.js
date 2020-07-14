@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Home} from "./main/Home";
+import {Student_Dashboard} from "./main/Student_Dashboard";
+import Admin_Dashboard from './admin/Admin_Dashboard'
 import {Login} from "./main/Login";
 import {BrowserRouter as Router, Switch, Route,} from "react-router-dom";
 
@@ -10,7 +11,8 @@ class App extends React.Component {
             <Router>
                 <Route exact path={"/"} component={Login}/>
                 <Switch>
-                    <Route path={"/home"} component={Home}/>
+                    <Route path={"/student_dashboard"} component={Student_Dashboard}/>
+                    <Route path={"/admin_dashboard"} component={Admin_Dashboard}/>
                 </Switch>
             </Router>
         )

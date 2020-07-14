@@ -6,7 +6,7 @@ export class Navigation extends Component {
     render() {
         return (
             <div>
-                <Link to={"/home"}>
+                <Link to={"/student_dashboard"}>
                     <nav className={"nav-nav"}>
                         <img src={logo} alt={'SafeSchool Logo'} id="nav-logo"/>
                     </nav>
