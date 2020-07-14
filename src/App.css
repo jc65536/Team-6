@@ -1,3 +1,37 @@
 .app {
 
 }
+
+/*Navigation.js*/
+.nav-nav {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    background: white;
+    align-content: center;
+    text-align:center;
+    border-bottom: 1px solid black;
+}
+
+#nav-logo {
+    margin-top:-10px;
+    position: relative;
+    width: 330px;
+    height: 100px;
+    padding: 10px;
+}
+
+/*Home.js*/
+.home-main {
+    align-content: center;
+    text-align: center;
+}
+
+.dot {
+    height: 200px;
+    width: 200px;
+    margin:15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}

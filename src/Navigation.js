@@ -7,7 +7,7 @@ export class Navigation extends Component {
         return (
             <div>
                 <Link to={"/home"}>
-                    <nav className={"nav"}>
+                    <nav className={"nav-nav"}>
                         <img src={logo} alt={'SafeSchool Logo'} id="nav-logo"/>
                     </nav>
                 </Link>
