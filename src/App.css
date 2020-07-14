@@ -77,7 +77,15 @@
     height: 200px;
     width: 200px;
     margin: 15px;
-    background-color: #bbb;
+    background-color: #995555;
     border-radius: 50%;
     display: inline-block;
+}
+
+.dot img {
+    position: absolute;
+    top: 28%;
+    transform: translate(-50%, -50%);
+    width:175px;
+    height:175px;
 }

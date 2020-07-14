@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 var firebase = require("firebase/app");
 require("firebase/database");
@@ -51,3 +52,4 @@ class DatabaseTest extends React.Component {
 }
 
 export default DatabaseTest;
+*/
