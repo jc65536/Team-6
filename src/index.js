@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Admin_Dashboard from "./admin/Admin_Dashboard";
+import App from "./App";
 
 ReactDOM.render(<Admin_Dashboard/>, document.getElementById('root'));
 
