@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Student_Dashboard} from "./main/Student_Dashboard";
-import Admin_Dashboard from './admin/Admin_Dashboard'
+import Admin_Dashboard from './admin/Admin_Dashboard';
+import Form from './main/Form'
 import {Login} from "./main/Login";
 import Form from './main/Form';
 import {BrowserRouter as Router, Switch, Route,} from "react-router-dom";

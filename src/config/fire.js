@@ -16,5 +16,4 @@ if (!firebase.apps.length) {
 }
 
 const fire = firebase;
-
 export default fire;

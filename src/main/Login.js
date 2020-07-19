@@ -9,6 +9,7 @@ export class Login extends Component {
         this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.signup = this.signup.bind(this);
+        this.googleSignIn = this.googleSignIn.bind(this);
         this.state = {
             email: '',
             password: '',
@@ -43,6 +44,20 @@ export class Login extends Component {
             })
     }
 
+    googleSignIn(e) {
+        e.preventDefault();
+        var provider = new fire.auth.GoogleAuthProvider();
+        fire.auth().signInWithPopup(provider).then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+            /*var errorCode = error.code;
+            var errorMessage = error.message;
+            var email = error.email;
+            var credential = error.credential;*/
+        });
+    }
+
     handleError() {
         this.setState({
             isIncorrect: true,
@@ -72,7 +87,7 @@ export class Login extends Component {
                                    placeholder="Password"/>
                         </label>
                         <button type="submit" onClick={this.login} className={"login-button"}>Login</button>
-                        <button onClick={this.signup}  className={"login-button"}>Signup</button>
+                        <button onClick={this.signup} className={"login-button"}>Signup</button>
                     </form>
 
                 </div>
