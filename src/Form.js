@@ -33,7 +33,7 @@ class Form extends React.Component {
                 },
                 lastUpdate: new Date().getTime()                            // lastUpdate key stores the last time the survey was taken. In the admin dashboard the admin can see any students whose lastUpdate was more than 24 hr ago, enabling them to ban such students.
             });
-            alert("Thank you for completing this form");
+            alert("Thank you for completing this form.");
         } else {
             alert("You are not a student at Bellarmine College Preparatory.");
         }
